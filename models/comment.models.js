@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const schema = mongoose.Schema({
-  content: { type: String, require: true },
-  author_id: { type: String, require: true },
-  article_id: { type: String, require: true },
-  created_at: { type: Date, default: new Date() },
-  updated_at: { type: Date, default: new Date() },
-});
-
-export default mongoose.model("articles", schema);
+export default model(
+  "articles",
+  Schema({
+    content: { type: String, required: true },
+    authorId: { type: Schema.Types.ObjectId, required: true },
+    articleId: { type: Schema.Types.ObjectId, required: true },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+  })
+);

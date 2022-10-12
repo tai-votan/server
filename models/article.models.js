@@ -1,21 +1,22 @@
-import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
 
-const schema = mongoose.Schema({
-  name: { type: String, required: true },
-  content: { type: String, required: true },
-  public: { type: Date, default: new Date() },
-  created_at: { type: Date, default: new Date() },
-  updated_at: { type: Date, default: new Date() },
-  featured_image: { type: String, default: "" },
-  visibility: { type: Boolean, default: true },
-  author_id: { type: String, required: true },
-  category_id: { type: String, required: true },
-  tags: { type: Array, default: [] },
-  slug: { type: String, required: true },
-  meta_title: { type: String, required: true },
-  meta_description: { type: String, required: true },
-  read: { type: Number, default: 0 },
-  like_count: { type: Number, default: 0 },
-});
-
-export default mongoose.model("articles", schema);
+export default model(
+  "articles",
+  Schema({
+    name: { type: String, required: true },
+    content: { type: String, required: true },
+    public: { type: Date, default: new Date() },
+    featuredImage: { type: String, default: "" },
+    visibility: { type: Boolean, default: true },
+    authorId: { type: Schema.Types.ObjectId, required: true },
+    categoryId: { type: Schema.Types.ObjectId, required: true },
+    tags: [{ type: Schema.Types.ObjectId }],
+    slug: { type: String, required: true },
+    metaTitle: { type: String, required: true },
+    metaDescription: { type: String, required: true },
+    read: { type: Number, default: 0 },
+    likeCount: { type: Number, default: 0 },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+  })
+);

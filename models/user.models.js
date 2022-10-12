@@ -1,16 +1,17 @@
-import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
 
-const schema = mongoose.Schema({
-  user_name: { type: String, require: true },
-  email: { type: String, require: true },
-  first_name: { type: String, require: true },
-  last_name: { type: String, require: true },
-  gender: { type: String, require: true },
-  phone: { type: String, require: true },
-  password: { type: String, require: true },
-  isActive: { type: Boolean, require: true, default: true },
-  created_at: { type: Date, default: new Date() },
-  updated_at: { type: Date, default: new Date() },
-});
-
-export default mongoose.model("users", schema);
+export default model(
+  "users",
+  Schema({
+    userName: { type: String, required: true },
+    email: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    gender: { type: String, default: "other" },
+    phone: { type: String, required: true },
+    password: { type: String, required: true },
+    isActive: { type: Boolean, default: true },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+  })
+);

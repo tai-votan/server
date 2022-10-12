@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
 
-const schema = mongoose.Schema({
-  user_id: { type: String, require: true },
-  role_name: { type: String, require: true },
-  created_at: { type: Date, default: new Date() },
-  updated_at: { type: Date, default: new Date() },
-});
-
-export default mongoose.model("roles", schema);
+export default model(
+  "roles",
+  Schema({
+    userId: { type: Schema.Types.ObjectId, required: true },
+    roleName: { type: String, required: true },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: new Date() },
+  })
+);

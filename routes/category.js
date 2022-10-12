@@ -1,10 +1,10 @@
 import express from "express";
-import userControllers from "../controllers/user.controllers.js";
+import categoryControllers from "../controllers/category.controllers.js";
 
 export default (e) => {
   const router = express.Router();
 
-  e.use("/user", router);
+  e.use("/categories", router);
 
   /**
    * @swagger
@@ -55,6 +55,7 @@ export default (e) => {
    *    description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
    */
 
-  router.get("/", userControllers.getCurrentUser);
-  router.post("/", userControllers.createUser);
+  router.get("/", categoryControllers.getAllCategory);
+  router.get("/:categoryId", categoryControllers.getCategoryDetails);
+  router.post("/", categoryControllers.createCategory);
 };

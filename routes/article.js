@@ -4,7 +4,7 @@ import articleControllers from "../controllers/article.controllers.js";
 export default (e) => {
   const router = express.Router();
 
-  e.use("/blogs", router);
+  e.use("/articles", router);
 
   /**
    * @swagger
@@ -55,7 +55,7 @@ export default (e) => {
    *    description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
    */
 
-  router.get("/", articleControllers().getAllArticle);
-  router.get("/:articleId", articleControllers().getArticleDetails);
-  router.put("/", articleControllers().createArticle);
+  router.get("/", articleControllers.getAllArticle);
+  router.get("/:articleId", articleControllers.getArticleDetails);
+  router.post("/", articleControllers.createArticle);
 };

@@ -30,3 +30,4 @@ screenshot
 .eslintcache
 
 build
+.env

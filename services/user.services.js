@@ -1,6 +1,6 @@
 import UserModels from "../models/user.models.js";
 
-export default () => ({
+export default {
   getCurrentUser: async () => {
     try {
       // @TODO: implement jwt
@@ -9,11 +9,17 @@ export default () => ({
       console.log(err);
     }
   },
-  createUser: async (user) => {
+  createUser: async (params) => {
     try {
+      const user = {
+        ...params,
+        user_name: params.userName,
+        first_name: params.firstName,
+        last_name: params.lastName,
+      };
       return await new UserModels(user).save();
     } catch (err) {
       console.log(err);
     }
   },
-});
+};

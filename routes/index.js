@@ -7,6 +7,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 
 import user from "./user.js";
 import article from "./article.js";
+import category from "./category.js";
 
 export default (app) => {
   app.use(helmet());
@@ -49,4 +50,5 @@ export default (app) => {
 
   user(app);
   article(app);
+  category(app);
 };

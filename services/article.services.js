@@ -1,10 +1,12 @@
 import ArticleModels from "../models/article.models.js";
-import { toSlug } from "../utils/utils.js";
+import { removeScriptTagObject, stripHTML, toSlug } from "../utils/utils.js";
 
-export default () => ({
+export default {
   getAllArticle: async () => {
     try {
-      return await ArticleModels.find();
+      const data = await ArticleModels.find();
+      console.log(`Func: getAllArticle - PARAMS: data`, data);
+      return data;
     } catch (err) {
       throw err;
     }
@@ -16,17 +18,19 @@ export default () => ({
       throw err;
     }
   },
-  createArticle: async (params) => {
+  createArticle: async (article) => {
     try {
-      const article = {
-        ...params,
-        slug: params.slug || toSlug(params.name),
-        meta_title: params.meta_title || params.name,
-        meta_description: params.meta_description || params.content,
-      };
-      return await new ArticleModels(article).save();
+      const { name, slug, content, metaTitle, metaDescription } = article;
+      return await new ArticleModels(
+        removeScriptTagObject({
+          ...article,
+          slug: toSlug(slug || name),
+          metaTitle: stripHTML(metaTitle || name),
+          metaDescription: stripHTML(metaDescription || content),
+        })
+      ).save();
     } catch (err) {
       throw err;
     }
   },
-});
+};
